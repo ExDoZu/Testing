@@ -3,6 +3,7 @@ package com.mycompany.lab1.task2;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.RepeatedTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -89,6 +90,20 @@ class ClosedHashTest {
 
         assertEquals("one", map.get(1));
         assertEquals("thirty", map.get(30));
+    }
+
+    ClosedHash<Integer, String> repeatedMap = new ClosedHash<>(Methods.LINEAR);
+
+    @RepeatedTest(4)
+    @ParameterizedTest
+    @EnumSource(ClosedHash.Methods.class)
+    void testCollisionHandlingRepeated() {
+
+        repeatedMap.add(1, "one");
+        repeatedMap.add(30, "thirty");
+
+        assertEquals("one", repeatedMap.get(1));
+        assertEquals("thirty", repeatedMap.get(30));
     }
 
     @Test
